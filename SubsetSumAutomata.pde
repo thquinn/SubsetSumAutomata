@@ -7,13 +7,13 @@ import java.util.HashSet;
 import gifAnimation.*;
 
 // Simulation.
-int WIDTH = 100, HEIGHT = WIDTH;
+int WIDTH = 64, HEIGHT = WIDTH;
 int[][] cells = new int[WIDTH][HEIGHT];
 boolean AUTO_RESET = true;
 
 // Display.
 int FRAMERATE = 30;
-int CELL_SIZE = 10, BORDER_SIZE = 2;
+int CELL_SIZE = 16, BORDER_SIZE = 0;
 boolean SHOW_NUMBERS = false, HIDE_ZEROS = false;
 
 // Tracking.
@@ -172,7 +172,7 @@ void draw() {
       fill(automaton.colorMap(cells[x][y]));
       int px = x * CELL_SIZE + (x + 1) * BORDER_SIZE;
       int py = y * CELL_SIZE + (y + 1) * BORDER_SIZE;
-      if (cells[x][y] > 0) {
+      if (cells[x][y] > 0 || BORDER_SIZE > 0) {
         rect(px, py, CELL_SIZE, CELL_SIZE);
       }
       if (SHOW_NUMBERS && (cells[x][y] > 0 || !HIDE_ZEROS)) {
