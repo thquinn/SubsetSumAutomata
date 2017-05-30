@@ -13,7 +13,7 @@ boolean AUTO_RESET = true;
 
 // Display.
 int FRAMERATE = 30;
-int CELL_SIZE = 10, BORDER_SIZE = 0;
+int CELL_SIZE = 10, BORDER_SIZE = 2;
 boolean SHOW_NUMBERS = false, HIDE_ZEROS = false;
 
 // Tracking.
@@ -29,13 +29,13 @@ String GIF_FILENAME = "1";
 int GIF_HYPERSPEED = 1;
 
 // Pulsars.
-Automaton automaton = new NSumAutomaton(3, 1, 1, Automaton.NEIGHBORS_ALL, 0, 0, 6, true);
+//Automaton automaton = new NSumAutomaton(3, 1, 1, Automaton.NEIGHBORS_ALL, 0, 0, 6, true);
 // Whorls. Target = 2 for diamond whorls, 3 for octagonal whorls, 4 for wave-like whorls, higher for general oceanea.
 //Automaton automaton = new NSumAutomaton(3, 1, 100, Automaton.NEIGHBORS_ALL, 0, 0, 5, true);
 // Eventual diagonal medium, leads to complex loops.
 //Automaton automaton = new NSumAutomaton(4, 9, 5, Automaton.NEIGHBORS_ORTHOGONAL, 0, 0, 7, true);
 // Puffers and spreading patterns. initGliderGunSeed() is for this. A messier of this naturally arises from a 100x100 toroid seeded with a 2x2 square of 3s.
-//Automaton automaton = new NSumAutomaton(3, 5, 7, Automaton.NEIGHBORS_ALL, 0, 0, 3, true);
+Automaton automaton = new NSumAutomaton(3, 5, 7, Automaton.NEIGHBORS_ALL, 0, 0, 3, true);
 // Rainbow diamonds.
 //Automaton automaton = new NSumAutomaton(9, 9, 8, Automaton.NEIGHBORS_ORTHOGONAL, 0, 0, 7, true);
 // Orthogonal puffers with divergent clumps.
@@ -126,6 +126,8 @@ Automaton automaton = new NSumAutomaton(3, 1, 1, Automaton.NEIGHBORS_ALL, 0, 0, 
 //Automaton automaton = new NSumAutomaton(13, 1, 0, Automaton.NEIGHBORS_ALL, 0, 0, 2, true);
 // Oblique waves and orth+diag spaceships.
 //Automaton automaton = new NSumAutomaton(21, 19, 12, Automaton.NEIGHBORS_ALL, 0, 0, 5, true);
+// Jellyfish-like diagonal spaceships. From Reddit user pixlartist.
+//Automaton automaton = new NSumAutomaton(123, 53, 12, Automaton.NEIGHBORS_ALL, 0, 0, 200, true);
 
 void setup() {
   if (GIF_MODE) {
@@ -146,10 +148,10 @@ void setup() {
     textFont(font);
   }
 
-  automaton.init(cells);
+  //automaton.init(cells);
   //initSquareSeed(2);
   //initSelfReplicatingSeed();
-  //initGliderGunSeed();
+  initGliderGunSeed();
   //initTestSeed();
 
   if (GIF_MODE) {
@@ -164,7 +166,7 @@ void draw() {
     println("Cache hits at " + (hits/(float)queries*100) + "%.");
   }
 
-  background(automaton.colorMap(0));
+  background(BORDER_SIZE > 0 ? color(0, 0, 0) : automaton.colorMap(0));
   for (int x = 0; x < WIDTH; x++) {
     for (int y = 0; y < HEIGHT; y++) {
       fill(automaton.colorMap(cells[x][y]));
@@ -214,12 +216,21 @@ public void keyPressed()
 // JUNK
 
 void initTestSeed() {
-  int cx = 4, cy = 4;
-
+  int cx = 4, cy = 1;
+  // Top seed crystal.
   cells[cx][cy] = 100;
   cells[cx+1][cy] = 103;
   cells[cx][cy+1] = 106;
   cells[cx+1][cy+1] = 109;
+  // Top extension.
+  cells[cx-1][cy+2] = 3;
+  cells[cx][cy+2] = 3;
+  cells[cx+1][cy+2] = 3;
+  // Top repeater crystal.
+  cells[cx-3][cy+6] = 100;
+  cells[cx-2][cy+6] = 103;
+  cells[cx-3][cy+7] = 106;
+  cells[cx-2][cy+7] = 109;
 }
 
 void initSquareSeed(int val) {

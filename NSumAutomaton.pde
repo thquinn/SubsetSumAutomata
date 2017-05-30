@@ -76,17 +76,17 @@ class NSumAutomaton implements Automaton {
 
   // Sum finding.
   boolean canSum(int[] neighbors, int target) {
-    //return getSums(neighbors).contains(target);
-    SubsetSumAutomata.queries++;
-    neighbors = sort(neighbors);
-    String key = join(nf(neighbors, 0), ","); 
-    if (!sumMap.containsKey(key)) {
-      HashSet<Integer> sums = getSums(neighbors);
-      sumMap.put(key, sums);
-    } else {
-      SubsetSumAutomata.hits++;
-    }
-    return sumMap.get(key).contains(target);
+    return getSums(neighbors).contains(target);
+    //SubsetSumAutomata.queries++;
+    //neighbors = sort(neighbors);
+    //String key = join(nf(neighbors, 0), ","); 
+    //if (!sumMap.containsKey(key)) {
+    //  HashSet<Integer> sums = getSums(neighbors);
+    //  sumMap.put(key, sums);
+    //} else {
+    //  SubsetSumAutomata.hits++;
+    //}
+    //return sumMap.get(key).contains(target);
   }
 
   HashSet<Integer> getSums(int[] neighbors) {
