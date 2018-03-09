@@ -67,6 +67,12 @@ class NSumAutomaton implements Automaton {
   }
 
   color colorMap(int value) {
+    //if (value <= 0) {
+    //  return color(0, 0, .15);
+    //}
+    //float hue = sqrt(value) * .05;
+    //float brightness = min(.5 + value * .025, 1);
+    //return color(hue, 1, brightness);
     if (value > 0) {
       value += 2;
     }
@@ -76,15 +82,16 @@ class NSumAutomaton implements Automaton {
 
   // Sum finding.
   boolean canSum(int[] neighbors, int target) {
-    return getSums(neighbors).contains(target);
+    //return getSums(neighbors).contains(target);
     //SubsetSumAutomata.queries++;
     //neighbors = sort(neighbors);
     //String key = join(nf(neighbors, 0), ","); 
     //if (!sumMap.containsKey(key)) {
-    //  HashSet<Integer> sums = getSums(neighbors);
-    //  sumMap.put(key, sums);
+      HashSet<Integer> sums = getSums(neighbors);
+      return sums.contains(target);
+      //sumMap.put(key, sums);
     //} else {
-    //  SubsetSumAutomata.hits++;
+      //SubsetSumAutomata.hits++;
     //}
     //return sumMap.get(key).contains(target);
   }

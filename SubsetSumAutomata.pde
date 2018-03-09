@@ -7,14 +7,14 @@ import java.util.HashSet;
 import gifAnimation.*;
 
 // Simulation.
-int WIDTH = 64, HEIGHT = WIDTH;
+int WIDTH = 200, HEIGHT = WIDTH;
 int[][] cells = new int[WIDTH][HEIGHT];
 boolean AUTO_RESET = true;
 
 // Display.
 int FRAMERATE = 30;
-int CELL_SIZE = 16, BORDER_SIZE = 0;
-boolean SHOW_NUMBERS = false, HIDE_ZEROS = false;
+int CELL_SIZE = 1, BORDER_SIZE = 0;
+boolean SHOW_NUMBERS = false, HIDE_ZEROS = true;
 
 // Tracking.
 int highest = 0;
@@ -24,18 +24,18 @@ HashSet<String> seen = new HashSet<String>();
 
 // Gifs.
 boolean GIF_MODE = false;
-int GIF_FRAMES = 200;
+int GIF_FRAMES = 400;
 String GIF_FILENAME = "1";
 int GIF_HYPERSPEED = 1;
 
 // Pulsars.
-//Automaton automaton = new NSumAutomaton(3, 1, 1, Automaton.NEIGHBORS_ALL, 0, 0, 6, true);
+Automaton automaton = new NSumAutomaton(3, 1, 1, Automaton.NEIGHBORS_ALL, 0, 0, 6, true);
 // Whorls. Target = 2 for diamond whorls, 3 for octagonal whorls, 4 for wave-like whorls, higher for general oceanea.
 //Automaton automaton = new NSumAutomaton(3, 1, 100, Automaton.NEIGHBORS_ALL, 0, 0, 5, true);
 // Eventual diagonal medium, leads to complex loops.
 //Automaton automaton = new NSumAutomaton(4, 9, 5, Automaton.NEIGHBORS_ORTHOGONAL, 0, 0, 7, true);
 // Puffers and spreading patterns. initGliderGunSeed() is for this. A messier of this naturally arises from a 100x100 toroid seeded with a 2x2 square of 3s.
-Automaton automaton = new NSumAutomaton(3, 5, 7, Automaton.NEIGHBORS_ALL, 0, 0, 3, true);
+//Automaton automaton = new NSumAutomaton(3, 5, 7, Automaton.NEIGHBORS_ALL, 0, 0, 3, true);
 // Rainbow diamonds.
 //Automaton automaton = new NSumAutomaton(9, 9, 8, Automaton.NEIGHBORS_ORTHOGONAL, 0, 0, 7, true);
 // Orthogonal puffers with divergent clumps.
@@ -126,8 +126,22 @@ Automaton automaton = new NSumAutomaton(3, 5, 7, Automaton.NEIGHBORS_ALL, 0, 0, 
 //Automaton automaton = new NSumAutomaton(13, 1, 0, Automaton.NEIGHBORS_ALL, 0, 0, 2, true);
 // Oblique waves and orth+diag spaceships.
 //Automaton automaton = new NSumAutomaton(21, 19, 12, Automaton.NEIGHBORS_ALL, 0, 0, 5, true);
-// Jellyfish-like diagonal spaceships. From Reddit user pixlartist.
-//Automaton automaton = new NSumAutomaton(123, 53, 12, Automaton.NEIGHBORS_ALL, 0, 0, 200, true);
+// Jellyfish-like diagonal spaceships. From Reddit user pixlartist. Used with initHighPeriodGliderSeed(). Tons of rakes, some producing larger ships than themselves. There's a replicating spaceship in here somewhere too -- check WebGL.
+//Automaton automaton = new NSumAutomaton(123, 53, 12, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Quadratic growth replicators, oblique ships. From Jonny Leahey. Used with initQuadraticReplicatorSeed(). 111/69/16, 111/67/15, 111/65/14, and 111/63/13 are almost identical, and the similarities continue w/o the quadratic. Why?!
+//Automaton automaton = new NSumAutomaton(111, 71, 17, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Strange waves. From Reddit user pixartist. 
+//Automaton automaton = new NSumAutomaton(164, 59, 13, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Explicit non-replicator rakes. From Reddit user pixartist.
+//Automaton automaton = new NSumAutomaton(15, 39, 7, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Crazy interacting waves and a spaceship that treads a massive wake.
+//Automaton automaton = new NSumAutomaton(138, 55, 27, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Quickly becomes dominated by wave guns (initWaveGunSeed), quadratic growth patterns. From Reddit user pixartist. These patterns appear in the same 2N+1/N/N-1 pattern down to 47/23/22, after which they stop abruptly.
+//Automaton automaton = new NSumAutomaton(53, 26, 25, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Smallest and fastest possible gliders. Exist in any 2N+1/N/N-1 rule where N >= 3. Use with initTinyGliderSeed().
+//Automaton automaton = new NSumAutomaton(7, 3, 2, Automaton.NEIGHBORS_ALL, 0, 0, 30, true);
+// Oblique gliders. Use with initObliqueGliderSeed().
+//Automaton automaton = new NSumAutomaton(117, 53, 21, Automaton.NEIGHBORS_ALL, 0, 0, 50, true);
 
 void setup() {
   if (GIF_MODE) {
@@ -148,11 +162,16 @@ void setup() {
     textFont(font);
   }
 
-  //automaton.init(cells);
+  automaton.init(cells);
+  //initObliqueGliderSeed();
+  //initHighPeriodGliderSeed();
   //initSquareSeed(2);
   //initSelfReplicatingSeed();
-  initGliderGunSeed();
+  //initGliderGunSeed();
   //initTestSeed();
+  //initHighPeriodGliderSeed();
+  //initQuadraticReplicatorSeed();
+  //initWaveGunSeed();
 
   if (GIF_MODE) {
     gifExport = new GifMaker(this, GIF_FILENAME + ".gif", 1);
@@ -283,6 +302,71 @@ void initGliderGunSeed() {
   cells[cx+1][cy+22] = 103;
   cells[cx][cy+23] = 106;
   cells[cx+1][cy+23] = 109;
+}
+
+// Period 402, mod 201, 25c/402 diagonal. Whoa.
+void initHighPeriodGliderSeed() {
+  int cx = cells.length / 2, cy = cells[0].length / 2;
+  // Seed.
+  cells[cx+1][cy] = 157;
+  cells[cx+2][cy] = 50;
+  cells[cx+4][cy] = 123;
+  cells[cx][cy+1] = 139;
+  cells[cx+2][cy+1] = 132;
+  cells[cx+3][cy+1] = 181;
+  cells[cx+4][cy+1] = 123;
+  cells[cx][cy+2] = 151;
+  cells[cx+3][cy+2] = 116;
+  cells[cx+1][cy+3] = 221;
+  // Ring.
+  cells[cx+5][cy+3] = 41;
+  cells[cx+6][cy+3] = 41;
+  cells[cx+7][cy+3] = 41;
+  cells[cx+5][cy+4] = 41;
+  cells[cx+6][cy+4] = 99;
+  cells[cx+7][cy+4] = 41;
+  cells[cx+5][cy+5] = 41;
+  cells[cx+6][cy+5] = 41;
+  cells[cx+7][cy+5] = 41;
+}
+
+void initQuadraticReplicatorSeed() {
+  int cx = cells.length / 2 - 1, cy = cells[0].length / 2 - 1;
+  cells[cx][cy] = 111;
+  cells[cx+1][cy] = 148;
+  cells[cx+2][cy+1] = 148;
+  cells[cx+2][cy+2] = 111;
+}
+
+void initWaveGunSeed() {
+  int cx = cells.length / 2, cy = cells[0].length / 2;
+  cells[cx+1][cy] = 26;
+  cells[cx+2][cy] = 1;
+  cells[cx+3][cy] = 1;
+  cells[cx+4][cy] = 26;
+  cells[cx][cy+1] = 78;
+  cells[cx+1][cy+1] = 104;
+  cells[cx+2][cy+1] = 53;
+  cells[cx+3][cy+1] = 53;
+  cells[cx+4][cy+1] = 26;
+  cells[cx+1][cy+2] = 131;
+  cells[cx+2][cy+2] = 55;
+  cells[cx+3][cy+2] = 4;
+  cells[cx+2][cy+3] = 82;
+  cells[cx+3][cy+3] = 53;
+  cells[cx+2][cy+4] = 31;
+}
+
+void initObliqueGliderSeed() {
+  int cx = cells.length / 2, cy = cells[0].length / 2;
+  cells[cx][cy-2] = 32;
+  cells[cx+2][cy-2] = 106;
+  cells[cx][cy-1] = 106;
+  cells[cx+1][cy-1] = 117;
+  cells[cx+2][cy-1] = 223;
+  cells[cx][cy] = 53;
+  cells[cx+1][cy] = 106;
+  cells[cx+2][cy] = 1;
 }
 
 boolean allZero() {

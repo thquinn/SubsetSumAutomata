@@ -1,0 +1,297 @@
+SSA Observations:
+- All of these rules were tested with a 0-200 seed range.
+- I skipped most rules where the reward and penalty aren't coprime, since cells not being able to reach some values makes things seem less... "pure," somehow. Also they support more numerical diversity which leads to more complex, alive patterns.
+- I theorize that the presence or absence of patterns in a particular rule has something to do with primes. The way they're more common at lower values but still sporadically and (seemingly) unpredictably present in higher ones...
+
+Still to Discover:
+- A puffer that leaves oscillators behind
+
+Improvements to WebGL implementation:
+- Toggle to restart whenever the whole plane is dead
+- Show generation # sincle last restart
+- Show population count
+- Show highest value
+
+Next Steps for Study:
+- Create dependency graphs for some patterns: complex oscillators, simple ships, complex ships.
+- Find identical-looking patterns in very different rules and compare the numbers that play the same roles.
+
++2/3/5: Spreading patterns that form rough divergent barriers at their intersections, creating a set of "Manhattan-Voronoi" cells.
+
++4/5/6: Patterned froth. Can be extended to +4+X/5+X/6+X with a tendency away from divergence.
+
++5/1/5: Cool "rose petal" froth, unfortunately divergent.
++5/1/10: First stable froth of +5, waves. Extensible penalty, stays surprisingly chaotic even at high values.
++5/2/3: Interesting geometric gradient spread, divergent region. Supports strange gradient ships at small starts.
++5/2/5: Similar to +5/2/3, slower spread, more divergence, and some very stable patterns within the chaos.
++5/2/7: Nothing permanent observed, but probably something here.
++5/3/2: Oscillating regions, some divergence.
++5/3/4: Same as +5/3/2, but regions are smaller and more frequent.
++5/4/7: Tiny diagonal ships.
++5/4/11: Similar to +6/4/5.
++5/4/21: Tiny rare oscillators.
++5/6/7: Patterned froth with high-value blips. Extensible to +5/6+X/7+2X.
++5/9/8: Waves, waveships, rakes, and very high output backrakes! And a rake that shoots out waves! Extensible to +5/9+X/8+X with gradually less interesting behavior.
++5/10/3: Tons of long-lived clusters, but nothing that lives. One of the most active ultimately-dead rules.
++5/10/9: Waves, waveships, rakes.
++5/11/3: Seemingly stable froth.
++5/11/6: Seemingly stable froth with vacancies and high-value blips.
++5/11/10: Sparse waves and waveships.
++5/12/7: Stable froth with high values, supports ships, rakes, and treaders with small starts.
++5/12/11: Waves and waveships.
++5/13/3: Patterned froth with vacancies. Extensible to +5/13+3X/3.
++5/13/8: Diagonal ships.
++5/13/4: Stable froth with vacancies and high-value blips.
++5/13/21: Patterned froth.
++5/14/9: Stable froth with blips.
++5/14/23: Patterned froth.
++5/15/2: Seemingly stable froth.
++5/15/7: Rare orthogonal ships of unusual design.
++5/16/11: Long-tailed diagonal ships. Extensible to +5/16+X/11+X. Very cool rakes seen at 17/12.
++5/17/2: Seemingly stable froth.
++5/17/4: Stable froth with small vacancies.
++5/17/6: Stable froth with small vacancies and blips.
++5/17/8: Five-sided waves, ships, divergent bits.
++5/19/7: Stable froth with small vacancies and fast blips.
++5/19/9: Dense replicating waves, wave rakes, 
++5/19/11: Patterned froth.
+
++6/1/6: First stable froth of +6, minor pulsars.
++6/1/7: Pulsar froth with divergence (might be temporary), strange geometric patterns in early generations.
++6/1/8: Stable froth, penalty infinitely extensible tending towards waves and sparseness.
++6/2/1: Quickly reaches large-scale stability with divergent regions.
++6/2/9: Sparse froth with waves between. Regions of high activity eventually expand, supporting divergent chunks in places. Similar behavior at penalties 11 and 13.
++6/2/15: Dense, non-divergent, chaotic spiral medium, don't appear to be any dominant or stable spiral cores -- they get pushed around a lot until they eventually disappear.
++6/2/17: Sparser spiral medium, eventually reaches stability.
++6/3/10: Pulsar/wave froth with diagonal waves, tons of diagonal lines of interference. Some divergence. True for the rest of this offset/reward with varying sparseness and amounts of divergence. Tends towards stability with divergence diagonal lines.
++6/4/5: Related to 6/4/11, but common oscillators get in the way of spreading patterns.
++6/4/11: Novel spreading square and linear objects with cool patterns of interference. Disturbing a spreading wave often causes a Sierpinski triangle to ripple through it.
++6/5/13: A variety of small oscillating structures. Also at penalty 19. Not much going on at this offset/reward!
++6/8/5: Stable froth.
++6/9/4: "Ships and hubs" setup... not sure if it tends towards extinction. Small starts tend towards methuselahs that spawn a couple different ship types. One cool ship type in particular has three rear sparks. Okay, it doesn't go extinct, but it start to make divergent chunks.
++6/9/5: "Mandala" patterns with contained divergence, seemingly only from inter-pattern interfence only. Looks like a better mandala rule.
++6/10/3: A few oscillators, including one very cool one.
++6/10/7: Stable froth.
++6/11/3: TONS of blinking oscillators similar to the one from +6/10/3, plus linear replicators.
++6/11/8: Stable froth.
++6/11/9: Wave froth.
++6/11/16: Wave/pattern froth. Extensible to +6/11+2X/16+4X.
++6/12/5: Stable froth, somewhat unusual blinking and pseudopatterns.
++6/12/7: So close to something alive... maybe something can be constructed?
++6/12/11: Rare waves and waveships.
++6/13/3: Ship-like oscillators, some high period, and one observed high-period orthogonal ship.
++6/13/4: "Ships and hubs" with standard orthogonal ships and some very unusual diagonal ones. In a small starting position, these are probably the smallest rakes I've seen, some producing orthogonal ships and some producing diagonal. Is there a rake rake in here?
++6/13/7: Stable froth with high-value spikes. Supports ships in sparser starts.
++6/13/10: Stable froth.
++6/13/12: Rare diagonal waves and waveships. Extensible to +6/13+X/12+X, with sporadic rarities as the penalty increases? Similar to +6/12/11 but sufficiently different in the constructions of the patterns.
++6/14/3: Similar to +6/11/3, but more linear oscillators rather than replicators and smaller divergences. Extensible to +6/14+3X/3.
++6/14/5: "Mandalas" tending more towards symmetry than those in +6/9/5, irregular borders with no divergence.
++6/14/11: Stable froth.
++6/15/2: Seemingly stable froth.
++6/15/4: Stable froth.
++6/15/8: Patterned froth.
++6/15/13: Wave froth.
++6/16/3: Small oscillators and some cool medium-sized radial ones.
++6/16/7: Wave froth.
++6/16/13: Tighter wave froth.
++6/17/4: Similar to +6/13/4. Here's a rake that produces both an orthogonal and a diagonal ship!
++6/17/5: Dense wave froth.
++6/17/11: Sparky froth. Supports ships in smaller starts, some with huge trails.
++6/17/14: Dense wave froth.
++6/17/15: Wave froth.
++6/18/5: Stable froth.
++6/19/3: Very cool, high-period oscillators.
++6/19/4: Stable froth.
++6/19/5: High-chaos mandalas that spawn divergent bits, orth/diag ships.
++6/19/8: Stable froth.
++6/19/13: Diagonal ships of various sizes and constructions.
++6/19/16: Stable froth.
++6/19/17: Wave froth.
+
++7/2/5: Rare oscillators, extremely rare diagonal spaceships. Novel-seeming shapes.
++7/2/7: Even rarer oscillators. Much more "explosive" patterns, some of which last for a few hundred generations before fizzling.
++7/3/4: Rare spaceships, similar in appearance to those in +7/2/5.
++7/3/8: Extremely rare diagonal ships.
++7/3/11: Unusual, semi-wave ships.
++7/4/3: Flickering right-angled clusters, some divergent, some not.
++7/4/5: Irregular, tumor-like growths that spread irregularly with divergent regions.
++7/5/8: Rare diagonal spaceships.
++7/5/9: Slowly spreading spiral regions with unusual dithering pulses. Some oscillators as well.
++7/6/11: Rare diagonal spaceships, smaller than the standard ones in +7.
++7/8/5: A single type of oscillator, all over the place, sometimes in clustered formations.
++7/8/9: Patterned froth, extensible to +7/7+X/7+2X where X!=7 (why?).
++7/11/5: A good variety of ships and waves, somewhat similar to +3/5/7.
++7/14/3: A single type of oscillator and a couple types of very slow, very strange spaceships.
++7/14/5: Patterned froth, completely different in appearance from the +7/7+X/7+2X family.
++7/15/8: Ships and rakes, extensible to +7/15+X/8+X where -- again -- X!=7.
++7/16/5: Flickering patterned regions bounded by divergent clumps.
++7/17/3: Slow patterned froth, extensible to +7/17+3X/3.
++7/17/9: Patterned froth similar to +7/14/5, extensible to +7/17+3X/9+2X.
++7/19/6: Froth with vacancies.
+
++8/1/4: Pulsars like +3/1/1 without the divergence.
++8/1/6: Froth with minor pulsar activity. Penalty can be scaled up to infinity, but seed patterns become very rare around 16. Alive states at lower penalties, however, are still alive after increasing it.
++8/2/5: Pulsar froth.
++8/2/5: Sparser pulsar froth.
++8/2/7: Patterned froth, extensible to +8/2/7+2X, trending towards sparseness and more ripples. Ripples stick to 45-degree angles more and more as the penalty gets high. Cool seed patterns and interference at infinity.
++8/3/5: One rare type of oscillator.
++8/4/7: Pulsar froth. Same kind of deal as +8/2/7+2X, except with some small divergent clusters at higher penalties.
++8/5/4: Pulsar froth with a strange "speckled" texture and divergent clusters.
++8/5/6: A couple varieties of tiny diagonal ships.
++8/5/7: Intricate spreading patterns with divergent clusters.
++8/5/11: Very similar to +7/5/9 with added linear patterns.
++8/5/19: Tiny diagonal ships and chaotic spreading patterns with unique dithering.
++8/6/5: Froth with pulsar-like masses that grow to fill the plane.
++8/7/4: Dense ship-like activity. Supports the most common orthogonal ship type.
++8/7/5: Very unique divergent orthogonal "circuit" patterns.
++8/7/6: Stable froth.
++8/7/9: Overlapping square-shaped regions, some of which are divergent.
++8/7/13: Tiny oscillators.
++8/7/17: Tiny oscillators and a spreading system of diagonal "wires" that intersect in interesting ways.
++8/7/25: Super tiny oscillators.
++8/9/4: Small oscillators and unusual diagonal waves.
++8/9/10: Patterned froth ala +7/7+X/7+2X, extensible to +8/9+2X/10+4X.
++8/9/23: Ditto.
++8/10/3: Froth that veeeeery slowly breeds growth that reach a fixed size.
++8/11/4: Nothing, but there might be something here.
++8/11/7: Froth that creates small divergent clusters.
++8/11/9: 45-degree waves that create small divergent clusters with their collisions, extensible to +8/11+2X/9+2X. No divergence at higher instances. Some evidence of quadratic patterns.
++8/11/14: Stable patterned froth.
++8/13/2: Stable froth.
++8/13/6: Dense waves and ships, somewhat similar to +3/5/7.
++8/13/9: Stable froth.
++8/14/3: Stable froth.
++8/14/5: Stable froth.
++8/15/2: Stable froth with vacancies. Supports some very strange ships with sparser starting configurations. Extensible to +8/15+2X/2, sparser at higher instances.
++8/15/11: Stable froth.
++8/16/3: Stable froth.
++8/16/5: Patterned froth.
++8/16/7: Wave-based froth with flickers of high values.
++8/16/9: Dense symmetric patterns, ships, and some rakes.
++8/17/13: Stable froth.
++8/18/3: Small oscillators.
++8/18/5: Stable froth.
++8/18/7: Stable froth.
++8/19/3: Stable froth.
++8/19/6: Patterned froth.
++8/19/10: Patterned froth.
++8/19/11: Orthogonally linear patterns and ships.
++8/19/15: Patterned froth.
++8/19/18: Nothing natural, but supports some waves generated by +8/19/17.
+
++9/1/4: Froth with minor pulsars.
++9/1/5: Froth with strange spreading pulsars.
++9/1/6: Stable, low-value froth. Extensible penalty, but it gets harder and harder to seed.
++9/2/5: Froth with minor pulsars.
++9/3/10: Waves, chaotic interference. Extensible penalty, interference gets less chaotic.
++9/4/7: Slow-spreading chaos. Common ships. Eventual divergence with selective spread.
++9/5/4: Large gradient ships, both diagonal and orthogonal.
++9/5/6: Orthogonal ships and waves.
++9/5/7: Pulsar froth separated into regions. Eventual divergence with selective spread.
++9/5/13: Rare diagonal ships and linear patterns.
++9/6/5: Unusual oscillators, some of extremely high period. Spreading gradientized chaos.
++9/6/21: Spreading concentric square medium with secondary freezing pattern.
++9/7/2: Bizarre and large square oscillators, diagonal ships with novel properties.
++9/7/4: Froth with strange pulsars and divergent chunks. Supports cool ships and waves with sparser starts.
++9/7/6: Stable froth with vacancies.
++9/7/8: A couple types of rare oscillator.
++9/7/12: Rare and tiny diagonal ships.
++9/7/20: Spreading rounded concentric squares with diagonal inclusions.
++9/7/29: Similar to +9/7/20, but much more sparse and irregular.
++9/8/5: Stable froth.
++9/8/15: Rare diagonal ships.
++9/8/19: Tiny oscillators and spreading square regions with cool collisions.
++9/10/7: Stable froth.
++9/10/11: Patterned froth similar to +7/7+X/7+2X but with divergent chunks. Extensible to +9/10+X/11+2X, but slower to create divergent chunks and works poorly when the reward and penalty aren't coprime.
++9/11/2: Stable high-valued froth.
++9/11/3: Froth with vacancies and flickering divergent squares.
++9/11/5: Tiny spiraling oscillators and orthogonal ships.
++9/11/8: Patterned froth.
++9/12/5: Froth with vacancies.
++9/13/6: Tiny spinning oscillators and diagonal ships.
++9/13/10: Dense waves and orth/diag wave ships.
++9/14/3: Cool ships, ship-like oscillators, waveships, spreading patterns.
++9/14/11: Like +9/13/10, but supports pattern generators that eventually take over.
++9/15/4: Stable froth.
++9/15/7: Orth/diag ships and linear patterns.
++9/16/11: Stable froth.
++9/17/3: Spreading patterns of all descriptions, strange ships, ship-like oscillators.
++9/17/5: Dense ships and linear patterns.
++9/17/7: Wavy froth.
++9/17/14: Like +9/17/7 but sparser.
++9/18/5: Patterned froth with high-value blips.
++9/19/3: Similar to the other +9/X/3 rules.
++9/19/4: Patterned froth.
++9/19/10: Tons of the familiar "sparky" diagonal ships, some larger variants.
++9/19/16: Wavy froth.
+
++10/1/4: First stable froth of +10, slow pulsars.
++10/1/6: Stable froth, very even low values. Works for penalties 7 and 8, 9 looks like it trends a little too close to extinction.
++10/2/5: Stable froth. Extensible to +10/2/5+2X, increasingly wave-based.
++10/3/8: Spreading chaos with symmetrical tendencies, some ships.
++10/4/7: Very close to being alive.
++10/5/∞: Strong diamond-shaped waves with divergent streaks.
++10/6/5: Tons of common orthogonal ships and growing geometric tumors.
++10/6/7: SUPER rare orthogonal ship.
++10/7/6: Ships and hubs. Fun flip-flop orth ships.
++10/7/8: Large oscillators, diagonal linear patterns, low-value spreading chaos.
++10/7/11: Orth ships.
++10/7/13: Spreading square patterns with borders, divergence at intersections.
++10/8/5: A couple varieties of orth ship.
++10/8/17: Tiny oscillators.
++10/9/4: Stable froth with temporary high-value chunks.
++10/9/5: Slow orth ships.
++10/9/7: Spreading divergent lines and "fans" with a tendency to collapse.
++10/9/8: Stable froth.
++10/9/17: Diag ships.
++10/9/31: Square oscillators of various sizes.
++10/11/5: Rare orth ships and divergent bits.
++10/11/6: Stable froth with the capacity to diverge from a small start.
++10/11/12: Patterned froth. Extensible to +10/11+2X/12+4X.
++10/12/7: Stable froth.
++10/13/4: Stable froth.
++10/13/8: Stable froth.
++10/13/11: Waves and waveships. Extensible to +10/13+2X/11+2X, saw a rake in +10/17/15.
++10/14/3: Seemingly froth.
++10/14/9: Stable froth.
++10/15/4: Orth ships and intricate diagonal meteors.
++10/15/7: Elementary oscillators and diag ships.
++10/15/13: Waves and waveships.
++10/16/11: Stable froth.
++10/18/13: Stable froth.
++10/19/4: Tons and tons of the same orthogonal ship. Rare instances of other ships.
++10/19/7: Stable froth.
++10/19/14: Stable froth.
+
++21/11/12: Orth+diag ships.
++33/11/12: Very round-looking wave froth. Worls for offsets 44, 55, and 66 as well, but with changed behavior.
++53/52/8: Rare oscillators.
++86/136/186: Square pattern, froth that develops within.
++100/56/17: Familiar diagonal ships.
++100/73/17: Orthogonal right-angled waves.
++100/107/17: Very strange right-angled diagonal ships.
++100/118/17: Spiraling regions with divergent borders.
++100/124/17: Unusually shaped orthogonal ships.
++100/134/17: Moving "electrons" in divergent structures. If the electrons are disrupted, the structures explode in a series of very fun pops. Extensible to +100/134+17X/17.
++100/141/17: Nested-v waves and ships.
++100/158/17: Small, long-lived, self-contained patterns that vary wildly in population, teetering close to death before reviving themselves. Do they repeat themselves?
++117/31/X: Notable, being the sparsest offset/reward pair I've found so far. Nothing happening above X=5 except some very boring oscillators.
++117/53/14: Rakes, waves. Similar to the "meteor" pattern but the rakes produce denser output.
++117/53/21: (12,5)c/51 ship!!!
++117/53/42: Extremely long-period oscillators, burning waves.
++126/419/293: So close to a cool oscillator! Sadly, dead.
++194/327/230: Patterned froth.
++252/419/293: "Wavechunk"-style froth, spacefilling patterns, some fun triangular ships. Rake potential.
++277/97/37: Funny thin orth ship, fat diag ship.
++277/117/37: Seems dense at first, then everything but one type of diag ship dies.
++277/154/37: Very sparky diag ships, but no rakes?
++277/157/37: Diag ships, waves with structures at the edges similar to said ships. But no waveships?
++277/191/37: Ugly diag ships.
++277/194/37: Chunky square spirals. Very cool. Looks a lot like certain non-coprime rules, but it's not. Extensible to +277/194+37X/37, but things get more volatile and blinky. Very high iterations (~601) with small starts have strange fractal skyscraper wave patterns.
++277/228/37: Diag ships with unusual tails. They look similar to +277/191/37.
++277/245/37: Tiny, unusual diag ships.
++277/265/37: Diag ships and small blinky oscillators.
++378/419/293: Variable-size oscillators, waves, waveships. Common four-ship seed.
++504/419/293: Five-sided waves.
++545/419/293: A crowd of large diagonal ships, some rake behavior.
++671/419/293: Diagonal ships
